@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+      <form action="/sqli/vulnerable" method="POST"> 
+        <div class="notification is-danger is-light">
+          O campo abaixo é vulneravel a SQL injection!
+        </div>
+        <h6>Procure pelo nome para saber o email</h6>
+        <br>
+        <input name="name" class="input is-rounded" type="text" placeholder="Nome">
+        <br>
+        <br>
+        <button type=submit class="button is-success is-rounded">Pesquisar</button>
+      </form>
+      {% autoescape false %}
+        {% if result %}
+          {% for x in result %}
+            <center>
+                <p> <h6>Results for {{name}} :</h6>
+                  <b>{{x[0]}}</b>
+                </p>
+            </center>
+          {% endfor %}
+        {% endif %}
+      {% endautoescape %}
+      
+      
+      <form action="/sqli/nonvulnerable" method="POST"> 
+        <div class="notification is-success is-light">
+          O campo abaixo está protegido a SQL injection!
+        </div>
+        <h6>Procure pelo nome para saber o email</h6>
+        <br>
+          <input name="name" class="input is-rounded" type="text" placeholder="Nome">
+        <br>
+        <br>
+          <button type="submit" class="button is-success is-rounded">Pesquisar</button>
+        <br>
+      </form>
+      <br>
+      {% if result2 %}
+      <center>
+          <p> <h6>Results for {{result2}} :</h6>
+          </p>
+      </center>
+      {% endif %}	
+      
+    </body>
+</html>
+{% endblock %}

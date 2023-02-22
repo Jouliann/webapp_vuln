@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <form action="/xss_reflected/vulnerable" method="GET"> 
+        <div class="notification is-danger is-light">
+          O campo abaixo é vulneravel a XSS refelected!
+        </div>
+        <br>
+        <input name="query" class="input is-rounded" type="text">
+        <br>
+        <br>
+        <button type=submit class="button is-success is-rounded">Enviar</button>
+      </form>
+      {% autoescape false %}
+        {% if query %}
+        <center>
+            <p> <h6>Results for {{query}} :</h6>
+            </p>
+        </center>
+        {% endif %}	
+      {% endautoescape %}
+
+      
+      <form action="/xss_reflected/nonvulnerable" method="POST"> 
+        <div class="notification is-success is-light">
+          O campo abaixo está protegido a XSS refelected!
+        </div>
+        <br>
+          <input name="query2" class="input is-rounded" type="text" placeholder="Input">
+        <br>
+        <br>
+          <button type="submit" class="button is-success is-rounded">Enviar</button>
+        <br>
+      </form>
+      <br>
+      {% if query2 %}
+      <center>
+          <p> <h6>Results for {{query2}} :</h6>
+          </p>
+      </center>
+      {% endif %}	
+      
+    </body>
+</html>
+{% endblock %}

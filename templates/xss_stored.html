@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+      <form action="/xss_stored/vulnerable" method="POST"> 
+        <div class="notification is-danger is-light">
+          O campo abaixo é vulneravel com XSS stored!
+        </div>
+        <br>
+        <h6>Faça o seu pedido:</h6>
+        <input name="pedidos" class="input is-rounded" type="text" placeholder="Input">
+        <br>
+        <br>
+        <button type=submit class="button is-success is-rounded">Enviar</button>
+      </form>
+
+      
+      <table id="example" class="table is-striped" style="width:100%">
+        {% autoescape false %}
+        {% for pedido, date in data %}
+        <thead>
+            <tr>
+                <th>Pedidos</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{pedido}}</td>
+                <td>{{date}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        {% endautoescape %}
+    </table>
+      
+      <form action="/xss_stored/nonvulnerable" method="POST"> 
+        <div class="notification is-success is-light">
+          O campo abaixo está protegido a XSS stored!
+        </div>
+        <br>
+        <h6>Faça o seu pedido:</h6>
+            <input name="pedidos2" class="input is-rounded" type="text" placeholder="Input">
+        <br>
+        <br>
+          <button type="submit" class="button is-success is-rounded">Enviar</button>
+        <br>
+      </form>
+      <br>
+
+      <table id="example" class="table is-striped" style="width:100%">
+
+        {% for pedido, date in data2 %}
+        <thead>
+            <tr>
+                <th>Pedido</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{pedido}}</td>
+                <td>{{date}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+
+
+    </body>
+</html>
+{% endblock %}

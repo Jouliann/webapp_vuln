@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="notification is-success is-light">
+<h4>
+    Abaixo encontra-se as soluçoes para cada tipo de Vulnerabilidade:
+</h4>
+    <ul>
+        <li><h4>sql injection</h4></li>
+        <textarea name="myTextarea" id="myTextarea" rows="1" cols="55">"  UNION SELECT "idade" FROM UTENTE WHERE "nome"= "Carminho"  --</textarea>
+        <li><h4>xss reflected</h4></li>
+        <textarea name="myTextarea" id="myTextarea" rows="1" cols="30"><script>alert('está vulneravel')</script></textarea>
+        <li><h4>xss stored</h4></li>
+        <textarea name="myTextarea" id="myTextarea" rows="1" cols="30"><script>alert('está vulneravel')</script></textarea>
+    </ul> 
+ 
+</div>
+{% endblock %}
